@@ -1,0 +1,39 @@
+|                | IP Network    | IP Gateway    | IP Broadcast     | Ottetti Host | Ottetti Network |
+|----------------|---------------|---------------|------------------|--------------|-----------------|
+| 1.1.1.1/8      | 1.0.0.0/8     | 1.0.0.1/8     | 1.255.255.255/8  | 24           | 8               |
+| 128.1.6.5/12   | 128.0.0.0/12  | 128.0.0.1/12  | 128.15.255.255/12| 20           | 12              |
+| 200.1.2.3/24   | 200.1.2.0/24  | 200.1.2.1/24  | 200.1.2.255/24   | 8            | 24              |
+| 192.192.1.1/22 | 192.192.0.0/22| 192.192.0.1/22| 192.192.3.255/22 | 10           | 22              |
+| 126.5.4.3/9    | 126.0.0.0/9   | 126.0.0.1/9   | 126.127.255.255/9| 23           | 9               |
+| 200.1.9.8/24   | 200.1.9.0/24  | 200.1.9.1/24  | 200.1.9.255/24   | 8            | 24              |
+| 172.16.0.4/16  | 172.16.0.0/16 | 172.16.0.1/16 | 172.16.255.255/16| 16           | 16              |
+|----------------|---------------|---------------|------------------|--------------|-----------------|
+
+Nella tabella superiore ho ricavato, partendo da un IP:
+
+IP Network:
+convertendo ip e subnet in binario e confrontandoli con l'operatore AND riconvertendo il binario risultante in decimale
+Esempio per 128.1.6.5/12:
+10000000.00000001.00000110.00000101 AND
+11111111.11110000.00000000.00000000
+10000000.00000000.00000000.00000000 = 128.0.0.0
+
+IP Gateway:
+E' un indirizzo IP che può essere assegnato a diversi valori ma di default viene solitamente assegnato al primo indirizzo disponibile
+Esempio per 128.1.6.5/12:
+128.0.0.1
+
+IP Broadcast:
+E' un indirizzo IP che dev'essere lasciato sempre disponibile per permettere all'host di ricevere le richieste di broadcast dagli switch ed è sempre l'ultimo indirizzo disponibile
+Esempio per 128.1.6.5/12:
+128.15.255.255
+
+Ottetti Host:
+Si ottengono contando gli 0 nel valore binario della subnet mask o equivalgono alla sottrazione di 32 (numero massimo) e il valore di quest'ultima espresso in CIDR
+Esempio per 128.1.6.5/12:
+32-12 = 20
+
+Ottetti Network:
+Si ottengono contando gli 1 nel valore binario della subnet mask o equivalgono al valore di quest'ultima espresso in CIDR
+Esempio per 128.1.6.5/12:
+12
